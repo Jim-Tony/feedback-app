@@ -1,11 +1,8 @@
-import {useState} from 'react';
-function Feedbackitem() {
-    const [rating,setRating] = useState(0);
+function Feedbackitem({item}) {
   return (
     <div className="card">
-        <div className="num-display">{rating}</div>
-        <div className="text-display">Hello</div>
-        <button onClick={()=>setRating(rating+1)}>Click</button>
+        <div className="num-display">{item.rating}</div>
+        <div className="text-display">{item.text}</div>
     </div>
   )
 }
