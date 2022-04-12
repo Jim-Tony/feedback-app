@@ -19,5 +19,7 @@ Header.defaultProps = {
 }
 Header.propTypes = {
     text:PropTypes.string,
+    bgColor:PropTypes.string,
+    textColot:PropTypes.string
 }
 export default Header
