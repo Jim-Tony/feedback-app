@@ -26,6 +26,10 @@ export const FeedBackProvider = ({children})=>{
       }
       const updateFeedBack = (id,updItem)=>{
           setFeedBack(feedBack.map(item=>(item.id===id?{...item,...updItem}:item)));
+          setFeedBackEdit({
+              item:{},
+              edit:false,
+          })
       }
     return <FeedBackContext.Provider
         value={{
