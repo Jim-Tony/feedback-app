@@ -1,10 +1,20 @@
 import {v4 as uuidv4} from 'uuid';
-import {createContext,useState} from 'react';
-import feedbackData from '../../data/feedbackData';
+import {createContext,useState,useEffect} from 'react';
 const FeedBackContext = createContext();
 
 export const FeedBackProvider = ({children})=>{
-    const [feedBack,setFeedBack] = useState(feedbackData);
+    const [feedBack,setFeedBack] = useState([]);
+    const [isLoading,setIsLoading] = useState(false);
+    const fetchFeedBack = async ()=>{
+        const response = await fetch(`http://localhost:5000/feedback`);
+        const data = await response.json();
+        setFeedBack(data);
+        setIsLoading(true);
+    }
+    useEffect(()=>{
+        fetchFeedBack();
+    },[])
+    //Fetching data
     const [feedBackEdit,setFeedBackEdit] = useState({
         item:{},
         edit:false
@@ -35,6 +45,7 @@ export const FeedBackProvider = ({children})=>{
         value={{
             feedBack,
             feedBackEdit,
+            isLoading,
             handleDelete,
             addFeedBack,
             editFeedBack,
