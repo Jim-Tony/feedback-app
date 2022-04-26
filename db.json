@@ -22,13 +22,18 @@
     },
     {
       "text": "New Item",
-      "rating": "8",
+      "rating": 8,
       "id": 6
     },
     {
       "text": "This is a new item",
       "rating": 9,
       "id": 7
+    },
+    {
+      "text": "Hello im new",
+      "rating": 8,
+      "id": 8
     }
   ]
 }

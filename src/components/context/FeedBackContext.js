@@ -1,4 +1,3 @@
-import {v4 as uuidv4} from 'uuid';
 import {createContext,useState,useEffect} from 'react';
 const FeedBackContext = createContext();
 
@@ -25,10 +24,14 @@ export const FeedBackProvider = ({children})=>{
             edit:true
         })
     }
-    const addFeedBack = (newFeedback)=>{
-        newFeedback.id = uuidv4();
-        // console.log(newFeedback);
-        setFeedBack([newFeedback,...feedBack]);
+    const addFeedBack = async (newFeedback)=>{
+        const response = await fetch('/feedback',{
+            method:'POST',
+            headers: {'Content-Type':'application/json'},
+            body:JSON.stringify(newFeedback),
+        })
+        const data = await response.json();
+        setFeedBack([data,...feedBack]);
       }
       const handleDelete = (item)=>{  
         window.confirm('Are you sure you want to delete this feedback item?') &&
