@@ -20,7 +20,7 @@ function FeedBackForm() {
     const handleChange = ({ target: { value } })=>{
         if(value === ''){
             setMessage(null);
-            setBtnDisabled(true)
+            setBtnDisabled(true);
         }
         else if(value!=='' && value.trim().length<=10){
             setBtnDisabled(true)
