@@ -33,12 +33,20 @@ export const FeedBackProvider = ({children})=>{
         const data = await response.json();
         setFeedBack([data,...feedBack]);
       }
-      const handleDelete = (item)=>{  
-        window.confirm('Are you sure you want to delete this feedback item?') &&
-          setFeedBack(feedBack.filter(fItem=>fItem.id!==item.id));
+      const handleDelete = async (item)=>{  
+        if(window.confirm('Are you sure you want to delete this feedback item?')){
+            setFeedBack(feedBack.filter(fItem=>fItem.id!==item.id));
+            await fetch(`/feedback/${item.id}`,{method:'DELETE'});
+        }
       }
-      const updateFeedBack = (id,updItem)=>{
-          setFeedBack(feedBack.map(item=>(item.id===id?{...item,...updItem}:item)));
+      const updateFeedBack = async (id,updItem)=>{
+          const response = await fetch(`/feedback/${id}`,{
+              method:'PUT',
+              headers:{'Content-Type':'application/json'},
+              body:JSON.stringify(updItem),
+          })
+          const data = await response.json();
+          setFeedBack(feedBack.map(item=>(item.id===id?{...item,...data}:item)));
           setFeedBackEdit({
               item:{},
               edit:false,
